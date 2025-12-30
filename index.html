@@ -1028,6 +1028,11 @@
                 }
             });
             
+            // Explicitly update portfolio info spans
+            document.querySelectorAll('.portfolio-info span').forEach(span => {
+                span.textContent = span.getAttribute('data-' + currentLang);
+            });
+            
             // Update button text
             langToggle.textContent = currentLang === 'ar' ? 'EN' : 'ع';
             
