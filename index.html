@@ -675,6 +675,7 @@
             margin-top: 1rem;
         }
         
+        /* حقوق النشر المحدثة */
         .copyright {
             text-align: center;
             padding: 2rem 0;
@@ -686,7 +687,11 @@
             border-top: 1px solid var(--border);
         }
         
-        .copyright span {
+        .copyright p {
+            margin: 0;
+        }
+        
+        .copyright span.year {
             color: var(--primary);
             font-weight: bold;
         }
@@ -922,12 +927,9 @@
         </div>
     </div>
 
-    <!-- Copyright -->
+    <!-- حقوق النشر - الإصلاح -->
     <div class="copyright">
-        <p data-en="© All rights reserved <span>2025</span> | Mostafa Mahmoud - Professional Video Editor" 
-           data-ar="© جميع الحقوق محفوظة <span>2025</span> | مصطفى محمود - محرر فيديو محترف">
-            © All rights reserved <span>2025</span> | Mostafa Mahmoud - Professional Video Editor
-        </p>
+        <p id="copyright-text"></p>
     </div>
 
     <script>
@@ -980,9 +982,19 @@
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             
-            // Update all elements with data-en & data-ar
+            // Update all elements with data-en & data-ar using innerHTML for HTML tags
             document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-                el.textContent = el.getAttribute('data-' + currentLang);
+                if (el.id === 'copyright-text') {
+                    // Use innerHTML for copyright to render span tag
+                    if (currentLang === 'ar') {
+                        el.innerHTML = '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو محترف';
+                    } else {
+                        el.innerHTML = '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Professional Video Editor';
+                    }
+                } else {
+                    // Use textContent for other elements
+                    el.textContent = el.getAttribute('data-' + currentLang);
+                }
             });
             
             // Update button text
@@ -1014,6 +1026,15 @@
             });
         }
         
+        // Initialize copyright element
+        function initializeCopyright() {
+            const copyrightElement = document.getElementById('copyright-text');
+            if (copyrightElement) {
+                copyrightElement.setAttribute('data-en', '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Professional Video Editor');
+                copyrightElement.setAttribute('data-ar', '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو محترف');
+            }
+        }
+        
         // Load saved language
         const savedLanguage = localStorage.getItem('language');
         if (savedLanguage) {
@@ -1022,7 +1043,8 @@
             currentLang = 'en'; // Default to English
         }
         
-        // Apply language on page load
+        // Initialize copyright and apply language on page load
+        initializeCopyright();
         updateLanguage();
         
         // Toggle language on button click
