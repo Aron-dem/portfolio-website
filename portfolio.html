@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصطفى محمود | محرر فيديو محترف</title>
+    <meta name="description" content="خدمات تحرير فيديو احترافية للمحتوى الإبداعي والتجاري والوثائقي. جودة سينمائية وتسليم سريع.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --primary: #6e40ff;
+            --primary-glow: rgba(110, 64, 255, 0.5);
+            --text: #ffffff;
+            --text-secondary: #aaaaaa;
+            --bg: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s ease;
+            --led-glow: rgba(110, 64, 255, 0.7);
+        }
+        body.light {
+            --bg: #f5f5f5;
+            --text: #111111;
+            --text-secondary: #666666;
+            --glass: rgba(0, 0, 0, 0.05);
+            --border: rgba(0, 0, 0, 0.1);
+            --led-glow: rgba(110, 64, 255, 0.5);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* === ANIMATED BACKGROUND === */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, 
+                #0a0a0a 0%, 
+                #1a1a2e 25%, 
+                #16213e 50%, 
+                #0f3460 75%, 
+                #533483 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        nav.shrink { padding: 1rem 0; }
+        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .toggles {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        #lang-toggle, #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass);
+            transition: var(--transition);
+        }
+        #lang-toggle:hover, #theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+        }
+        .hamburger { 
+            display: none; 
+            cursor: pointer; 
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.2s forwards;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px var(--primary-glow); }
+        .btn-secondary:hover { background: var(--primary); }
+
+        section { padding: 8rem 0; position: relative; }
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: var(--primary);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        .section-title.visible { opacity: 1; transform: translateY(0); }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+        .card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px var(--primary-glow);
+        }
+        
+        /* LED BACKGROUND EFFECT */
+        .led-background {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--led-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            filter: blur(40px);
+            pointer-events: none;
+        }
+        
+        .card.active .led-background {
+            opacity: 0.5;
+            animation: ledPulse 2s infinite alternate;
+        }
+        
+        /* كارد المحتوى الإبداعي فقط يكون باللون الأزرق */
+        .card:nth-child(2) {
+            background: rgba(110, 64, 255, 0.1);
+            border-color: rgba(110, 64, 255, 0.3);
+        }
+        
+        .card i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* أيقونة الكارد الثاني (المحتوى الإبداعي) فقط تضيء */
+        .card:nth-child(2) i {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--led-glow), 
+                         0 0 20px var(--led-glow);
+            animation: ledIconPulse 2s infinite;
+        }
+        
+        .card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text); }
+        .card p { color: var(--text-secondary); }
+        
+        /* تأثير LED على كلمة "ديناميكية" في الكارد الثاني */
+        .led-word {
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 0 5px var(--led-glow);
+        }
+
+        @keyframes ledPulse {
+            from { opacity: 0.3; transform: scale(0.8); }
+            to { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        @keyframes ledIconPulse {
+            0% { text-shadow: 0 0 10px var(--led-glow); }
+            50% { text-shadow: 0 0 25px var(--led-glow), 0 0 40px var(--led-glow); }
+            100% { text-shadow: 0 0 10px var(--led-glow); }
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+        .portfolio-item.visible { opacity: 1; transform: scale(1); }
+        .portfolio-item video { width: 100%; height: 100%; object-fit: cover; }
+        .portfolio-item .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(110, 64, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .portfolio-item:hover .overlay { opacity: 1; }
+        .portfolio-item .overlay span { color: white; font-size: 1.5rem; font-weight: 700; }
+
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal video { max-width: 100%; max-height: 90vh; border-radius: 10px; box-shadow: 0 0 50px var(--primary-glow); }
+        .close-modal {
+            position: absolute;
+            top: 30px; right: 30px;
+            color: white; font-size: 3rem; cursor: pointer;
+            background: none; border: none;
+        }
+
+        .pricing-card { padding: 3rem 2rem; }
+        .pricing-card .price { font-size: 3.5rem; font-weight: 900; margin: 1.5rem 0; color: var(--primary); }
+        .pricing-card ul { list-style: none; margin-bottom: 2rem; text-align: right; }
+        .pricing-card ul li { margin-bottom: 1rem; color: var(--text-secondary); }
+        .pricing-card ul li::before { content: '✓'; color: var(--primary); margin-left: 10px; font-weight: bold; }
+        .pricing-card.featured { border: 2px solid var(--primary); transform: scale(1.05); z-index: 10; }
+
+        .contact-buttons { display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; }
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+        .contact-btn:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-5px); }
+        .contact-btn i { font-size: 1.5rem; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+        }
+        
+        .copyright span {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { 
+                position: fixed; 
+                top: 80px; 
+                right: -100%; 
+                flex-direction: column; 
+                background: var(--glass); 
+                width: 80%; 
+                height: calc(100vh - 80px); 
+                padding: 3rem; 
+                transition: right 0.4s; 
+                backdrop-filter: blur(15px); 
+                z-index: 1000;
+            }
+            .nav-links.open { right: 0; }
+            html[dir="ltr"] .nav-links { right: auto; left: -100%; }
+            html[dir="ltr"] .nav-links.open { left: 0; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.8rem; }
+            .cta-buttons { flex-direction: column; }
+            .pricing-card.featured { transform: none; }
+            .contact-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- === ANIMATED BACKGROUND === -->
+    <div class="animated-bg"></div>
+    <div id="particles-js"></div>
+
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">مصطفى محمود</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="active" data-en="Home" data-ar="الرئيسية">الرئيسية</a></li>
+                <li><a href="#services" data-en="Services" data-ar="الخدمات">الخدمات</a></li>
+                <li><a href="#portfolio" data-en="Portfolio" data-ar="الأعمال">الأعمال</a></li>
+                <li><a href="#pricing" data-en="Pricing" data-ar="الأسعار">الأسعار</a></li>
+                <li><a href="#contact" data-en="Contact" data-ar="تواصل">تواصل</a></li>
+            </ul>
+            <div class="toggles">
+                <button id="lang-toggle" aria-label="Toggle language">EN</button>
+                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 data-en="Professional Video Editor" data-ar="محرر فيديو محترف">محرر فيديو محترف</h1>
+            <p data-en="Turning your ideas into cinematic masterpieces with creative editing and premium quality." data-ar="أحول أفكارك إلى تحف سينمائية بتحرير إبداعي وجودة ممتازة.">أحول أفكارك إلى تحف سينمائية بتحرير إبداعي وجودة ممتازة.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary" data-en="Start Project" data-ar="ابدأ المشروع">ابدأ المشروع</a>
+                <a href="#portfolio" class="btn btn-secondary" data-en="View Portfolio" data-ar="شاهد الأعمال">شاهد الأعمال</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title scroll-animate" data-en="Services" data-ar="خدماتي">خدماتي</h2>
+            <div class="grid">
+                <div class="card scroll-animate">
+                    <div class="led-background"></div>
+                    <i class="fas fa-building"></i>
+                    <h3 data-en="Corporate Videos" data-ar="فيديوهات الشركات">فيديوهات الشركات</h3>
+                    <p data-en="Professional editing for promotional and presentation videos." data-ar="تحرير احترافي للفيديوهات الترويجية والتقديمية.">تحرير احترافي للفيديوهات الترويجية والتقديمية.</p>
+                </div>
+                <div class="card scroll-animate">
+                    <div class="led-background"></div>
+                    <i class="fas fa-fire"></i>
+                    <h3 data-en="Creative Content" data-ar="محتوى إبداعي">محتوى إبداعي</h3>
+                    <p data-en="YouTube, TikTok & Reels with dynamic effects and transitions." data-ar="يوتيوب، تيك توك وريلز مع تأثيرات وانتقالات <span class='led-word'>ديناميكية</span>.">يوتيوب، تيك توك وريلز مع تأثيرات وانتقالات <span class='led-word'>ديناميكية</span>.</p>
+                </div>
+                <div class="card scroll-animate">
+                    <div class="led-background"></div>
+                    <i class="fas fa-video"></i>
+                    <h3 data-en="Documentaries" data-ar="أفلام وثائقية">أفلام وثائقية</h3>
+                    <p data-en="Long-form storytelling with cinematic color grading." data-ar="سرد قصصي طويل مع تدريج لون سينمائي.">سرد قصصي طويل مع تدريج لون سينمائي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title scroll-animate" data-en="Portfolio" data-ar="معرض الأعمال">معرض الأعمال</h2>
+            <div class="grid" id="portfolio-grid">
+                <div class="portfolio-item scroll-animate" data-category="corporate">
+                    <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-businessman-looking-at-charts-on-a-computer-5093-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Corporate">
+                        <source type="video/mp4">
+                    </video>
+                    <div class="overlay"><span data-en="Corporate Video" data-ar="فيديو شركة">فيديو شركة</span></div>
+                </div>
+                <div class="portfolio-item scroll-animate" data-category="creative">
+                    <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Creative">
+                        <source type="video/mp4">
+                    </video>
+                    <div class="overlay"><span data-en="Creative Content" data-ar="محتوى إبداعي">محتوى إبداعي</span></div>
+                </div>
+                <div class="portfolio-item scroll-animate" data-category="documentary">
+                    <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Documentary">
+                        <source type="video/mp4">
+                    </video>
+                    <div class="overlay"><span data-en="Documentary" data-ar="وثائقي">وثائقي</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="modal">
+        <button class="close-modal">&times;</button>
+        <video controls id="modal-video"></video>
+    </div>
+
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title scroll-animate" data-en="Pricing" data-ar="الأسعار">الأسعار</h2>
+            <div class="grid">
+                <div class="card pricing-card scroll-animate">
+                    <h3 data-en="Basic" data-ar="أساسية">أساسية</h3>
+                    <div class="price">$299</div>
+                    <ul>
+                        <li data-en="Up to 5 minutes" data-ar="حتى 5 دقائق">حتى 5 دقائق</li>
+                        <li data-en="Basic color correction" data-ar="تصحيح لون أساسي">تصحيح لون أساسي</li>
+                        <li data-en="2 revisions" data-ar="مراجعتين">مراجعتين</li>
+                        <li data-en="7 days delivery" data-ar="تسليم 7 أيام">تسليم 7 أيام</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" data-en="Choose" data-ar="اختر">اختر</a>
+                </div>
+                <div class="card pricing-card featured scroll-animate">
+                    <h3 data-en="Professional" data-ar="احترافية">احترافية</h3>
+                    <div class="price">$599</div>
+                    <ul>
+                        <li data-en="Up to 15 minutes" data-ar="حتى 15 دقيقة">حتى 15 دقيقة</li>
+                        <li data-en="Advanced color grading" data-ar="تدريج لون متقدم">تدريج لون متقدم</li>
+                        <li data-en="Unlimited revisions" data-ar="مراجعات غير محدودة">مراجعات غير محدودة</li>
+                        <li data-en="5 days delivery" data-ar="تسليم 5 أيام">تسليم 5 أيام</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" data-en="Choose" data-ar="اختر">اختر</a>
+                </div>
+                <div class="card pricing-card scroll-animate">
+                    <h3 data-en="Premium" data-ar="بريميوم">بريميوم</h3>
+                    <div class="price">$999</div>
+                    <ul>
+                        <li data-en="Unlimited length" data-ar="طول غير محدود">طول غير محدود</li>
+                        <li data-en="Cinematic effects" data-ar="تأثيرات سينمائية">تأثيرات سينمائية</li>
+                        <li data-en="Priority support" data-ar="دعم أولوية">دعم أولوية</li>
+                        <li data-en="3 days delivery" data-ar="تسليم 3 أيام">تسليم 3 أيام</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" data-en="Choose" data-ar="اختر">اختر</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title scroll-animate" data-en="Get in Touch" data-ar="تواصل معي">تواصل معي</h2>
+            <p class="scroll-animate" data-en="Ready to bring your vision to life? Let's talk!" data-ar="جاهز لتحويل رؤيتك إلى واقع؟ تواصل معي الآن!">جاهز لتحويل رؤيتك إلى واقع؟ تواصل معي الآن!</p>
+            <div class="contact-buttons">
+                <a href="https://wa.me/201508426970?text=أهلا%20أتيت%20من%20الموقع" target="_blank" class="contact-btn scroll-animate">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-en="WhatsApp" data-ar="واتساب">واتساب</span>
+                </a>
+                <a href="mailto:hello@mostafamahmoud.com" class="contact-btn scroll-animate">
+                    <i class="fas fa-envelope"></i>
+                    <span data-en="Email" data-ar="إيميل">إيميل</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- حقوق النشر -->
+    <div class="copyright">
+        <p data-en="© All rights reserved <span>2025</span> | Mostafa Mahmoud - Professional Video Editor" 
+           data-ar="© جميع الحقوق محفوظة <span>2025</span> | مصطفى محمود - محرر فيديو محترف">
+            © جميع الحقوق محفوظة <span>2025</span> | مصطفى محمود - محرر فيديو محترف
+        </p>
+    </div>
+
+    <script>
+        // === ANIMATED BACKGROUND - AUTOMATIC SPEED UP ===
+        const animatedBg = document.querySelector('.animated-bg');
+        
+        // Set initial fast speed
+        let animationSpeed = 2.0; // Twice as fast
+        
+        // Apply fast speed immediately
+        function applyFastSpeed() {
+            animatedBg.style.animationDuration = `${8 / animationSpeed}s`;
+        }
+        
+        // Apply fast speed on load
+        applyFastSpeed();
+        
+        // Increase speed every 10 seconds
+        setInterval(() => {
+            if (animationSpeed < 3.5) { // Max speed limit
+                animationSpeed += 0.1;
+                applyFastSpeed();
+            }
+        }, 10000); // Increase speed every 10 seconds
+
+        // Particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 150, density: { enable: true, value_area: 1000 } },
+                color: { value: "#6e40ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#6e40ff", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, resize: true }
+            },
+            retina_detect: true
+        });
+
+        // Language & Theme Toggle
+        const langToggle = document.getElementById('lang-toggle');
+        let currentLang = 'ar';
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update all elements with data-en & data-ar
+            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + currentLang);
+            });
+            
+            langToggle.textContent = currentLang === 'ar' ? 'EN' : 'ع';
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light');
+            themeToggle.textContent = '☀️';
+        }
+
+        // Navbar shrink & active link
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('shrink', window.scrollY > 50);
+            
+            // Active link logic
+            const sections = document.querySelectorAll('section');
+            let current = '';
+            
+            sections.forEach(sec => {
+                const secTop = sec.offsetTop - 100;
+                if (window.scrollY >= secTop) {
+                    current = sec.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            }
+        });
+
+        // LED BACKGROUND EFFECT FOR SERVICE CARDS
+        const serviceCards = document.querySelectorAll('.card');
+        
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active class from all cards
+                serviceCards.forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Add active class to clicked card
+                this.classList.add('active');
+                
+                // If it's the Creative Content card, add extra LED effect
+                const icon = this.querySelector('i');
+                if (icon && icon.classList.contains('fa-fire')) {
+                    const ledBackground = this.querySelector('.led-background');
+                    ledBackground.style.opacity = '0.7';
+                    ledBackground.style.animation = 'ledPulse 1s infinite alternate';
+                }
+            });
+            
+            // Remove active class when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.card')) {
+                    serviceCards.forEach(card => {
+                        card.classList.remove('active');
+                    });
+                }
+            });
+        });
+
+        // Portfolio Modal
+        const modal = document.getElementById('modal');
+        const modalVideo = document.getElementById('modal-video');
+        const closeModalBtn = document.querySelector('.close-modal');
+        
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.querySelector('video').dataset.src;
+                modalVideo.src = src;
+                modal.classList.add('active');
+                modalVideo.play();
+            });
+        });
+        
+        // Close modal with button
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = '';
+        });
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
+        });
+
+        // Lazy load videos & scroll animation
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.tagName === 'VIDEO') {
+                        entry.target.src = entry.target.dataset.src;
+                        entry.target.load();
+                    }
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('video, .scroll-animate').forEach(el => observer.observe(el));
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu after click
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
