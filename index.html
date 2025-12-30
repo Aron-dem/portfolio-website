@@ -357,19 +357,34 @@
         }
         .portfolio-item.visible { opacity: 1; transform: scale(1); }
         .portfolio-item video { width: 100%; height: 100%; object-fit: cover; }
+        .portfolio-item .video-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
         .portfolio-item .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+            background: rgba(110, 64, 255, 0.4);
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding-bottom: 20px;
-            opacity: 1;
+            opacity: 0;
             transition: var(--transition);
         }
-        .portfolio-item:hover .overlay { background: rgba(110, 64, 255, 0.6); align-items: center; padding-bottom: 0; }
-        .portfolio-item .overlay span { color: white; font-size: 1.5rem; font-weight: 700; }
+        .portfolio-item:hover .overlay { opacity: 1; }
+        .portfolio-item .overlay i { color: white; font-size: 3rem; }
+        .portfolio-info {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .portfolio-info span {
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: block;
+        }
 
         .modal {
             position: fixed;
@@ -816,22 +831,37 @@
             <h2 class="section-title scroll-animate" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
             <div class="grid" id="portfolio-grid">
                 <div class="portfolio-item scroll-animate" data-category="corporate">
-                    <video muted loop playsinline preload="none" data-src="Work1.mp4" poster="Poster1.jpg">
-                        <source type="video/mp4">
-                    </video>
-                    <div class="overlay"><span data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</span></div>
+                    <div class="video-container">
+                        <video muted loop playsinline preload="none" data-src="Work1.mp4" poster="Poster1.jpg">
+                            <source type="video/mp4">
+                        </video>
+                        <div class="overlay"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</span>
+                    </div>
                 </div>
                 <div class="portfolio-item scroll-animate" data-category="creative">
-                    <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Creative">
-                        <source type="video/mp4">
-                    </video>
-                    <div class="overlay"><span data-en="Creative Content" data-ar="محتوى إبداعي">Creative Content</span></div>
+                    <div class="video-container">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Creative">
+                            <source type="video/mp4">
+                        </video>
+                        <div class="overlay"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span data-en="Creative Content" data-ar="محتوى إبداعي">Creative Content</span>
+                    </div>
                 </div>
                 <div class="portfolio-item scroll-animate" data-category="documentary">
-                    <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Documentary">
-                        <source type="video/mp4">
-                    </video>
-                    <div class="overlay"><span data-en="Documentary" data-ar="وثائقي">Documentary</span></div>
+                    <div class="video-container">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Documentary">
+                            <source type="video/mp4">
+                        </video>
+                        <div class="overlay"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span data-en="Documentary" data-ar="وثائقي">Documentary</span>
+                    </div>
                 </div>
             </div>
         </div>
