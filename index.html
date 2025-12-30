@@ -1190,10 +1190,22 @@
         
         document.querySelectorAll('.portfolio-item').forEach(item => {
             item.addEventListener('click', () => {
-                const src = item.querySelector('video').dataset.src;
-                modalVideo.src = src;
+                const videoElement = item.querySelector('video');
+                const src = videoElement.dataset.src;
+                
+                // Show loading state or just set src
+                modalVideo.innerHTML = `<source src="${src}" type="video/mp4"> Your browser does not support the video tag.`;
+                modalVideo.load(); // Force reload the video source
+                
                 modal.classList.add('active');
-                modalVideo.play();
+                
+                // Attempt to play and handle potential errors
+                const playPromise = modalVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Video play failed:", error);
+                    });
+                }
             });
         });
         
