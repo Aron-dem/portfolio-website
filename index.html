@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mostafa Mahmoud | Professional Video Editor</title>
-    <meta name="description" content="Professional video editing services for creative, commercial, and documentary content. Cinematic quality and fast delivery.">
+    <title>Mostafa Mahmoud | Video Editor</title>
+    <meta name="description" content="Video editing services for creative, commercial, and documentary content. Cinematic quality and fast delivery.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -345,54 +345,164 @@
             100% { text-shadow: 0 0 10px var(--led-glow); }
         }
 
-        .portfolio-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: var(--transition);
+        /* === PORTFOLIO STYLING - CENTER PLAY BUTTON WITH EFFECT === */
+        .portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
         }
-        .portfolio-item.visible { opacity: 1; transform: scale(1); }
-        .portfolio-item video { width: 100%; height: 100%; object-fit: cover; }
+        
         .portfolio-item {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+            width: 320px; 
         }
-        .portfolio-item .video-container {
+        
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .video-container {
             position: relative;
-            border-radius: 20px;
+            width: 100%;
+            height: 568px; /* 320 * 1.777 = 568 (9:16) */
+            border-radius: 15px;
             overflow: hidden;
-            aspect-ratio: 16/9;
             background: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             cursor: pointer;
+            transition: var(--transition);
         }
-        .portfolio-item .overlay {
+        
+        .video-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--primary-glow);
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Overlay Update: Centered & Darker */
+        .video-container .overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(110, 64, 255, 0.4);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* خلفية داكنة عند التحويم */
+            display: flex;
+            align-items: center; /* توسيط عمودي */
+            justify-content: center; /* توسيط أفقي */
+            opacity: 0;
+            transition: var(--transition);
+            border-radius: 15px;
+            z-index: 10;
+        }
+        
+        .video-container:hover .overlay {
+            opacity: 1;
+        }
+        
+        /* Play Button Wrapper Design */
+        .play-btn-wrapper {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
+            box-shadow: 0 10px 20px var(--primary-glow);
+            transition: var(--transition);
+            animation: playPulse 2s infinite;
+            position: relative;
+        }
+
+        .play-btn-wrapper i {
+            color: white;
+            font-size: 24px;
+            margin-left: 4px; /* محاذاة بصرية */
+            z-index: 2;
+        }
+
+        /* Wave Effect (Ripple) behind button */
+        .play-btn-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(110, 64, 255, 0.7);
+            animation: ripple 1.5s infinite;
+            z-index: -1;
+        }
+
+        .video-container:hover .play-btn-wrapper {
+            transform: scale(1.1); /* تكبير عند التحويم */
+        }
+        
+        /* Animations */
+        @keyframes playPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(110, 64, 255, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(110, 64, 255, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(110, 64, 255, 0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* Video Info */
+        .video-info {
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
             transition: var(--transition);
         }
-        .portfolio-item:hover .overlay { opacity: 1; }
-        .portfolio-item .overlay i { color: white; font-size: 3rem; }
-        .portfolio-info {
-            text-align: center;
-            padding: 5px 0;
+        
+        .video-category {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
-        .portfolio-info span {
-            color: var(--text) !important;
-            font-size: 1.3rem !important;
-            font-weight: 700 !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
+        
+        .portfolio-item:hover .video-title {
+            color: var(--primary);
         }
 
         .modal {
@@ -764,6 +874,32 @@
                 width: 50px;
                 height: 50px;
             }
+            
+            /* Responsive portfolio for mobile */
+            .portfolio-item {
+                width: 280px;
+            }
+            
+            .video-container {
+                height: 498px; /* 280 * 1.777 = 498 */
+            }
+            
+            .portfolio-container {
+                gap: 1.5rem;
+            }
+            
+            .video-title {
+                font-size: 1.2rem;
+            }
+            
+            /* Play button mobile adjustment */
+            .play-btn-wrapper {
+                width: 60px;
+                height: 60px;
+            }
+            .play-btn-wrapper i {
+                font-size: 20px;
+            }
         }
         
         /* RTL specific styles */
@@ -800,7 +936,7 @@
 
     <section id="home" class="hero">
         <div class="container">
-            <h1 data-en="Professional Video Editor" data-ar="محرر فيديو محترف">Professional Video Editor</h1>
+            <h1 data-en="Video Editor" data-ar="محرر فيديو">Video Editor</h1>
             <p data-en="Turning your ideas into cinematic masterpieces with creative editing and premium quality." data-ar="أحول أفكارك إلى تحف سينمائية بتحرير إبداعي وجودة ممتازة.">Turning your ideas into cinematic masterpieces with creative editing and premium quality.</p>
             <div class="cta-buttons">
                 <a href="#contact" class="btn btn-primary" data-en="Start Project" data-ar="ابدأ المشروع">Start Project</a>
@@ -817,7 +953,7 @@
                     <div class="led-background"></div>
                     <i class="fas fa-building"></i>
                     <h3 data-en="Corporate Videos" data-ar="فيديوهات الشركات">Corporate Videos</h3>
-                    <p data-en="Professional editing for promotional and presentation videos." data-ar="تحرير احترافي للفيديوهات الترويجية والتقديمية.">Professional editing for promotional and presentation videos.</p>
+                    <p data-en="Editing for promotional and presentation videos." data-ar="تحرير للفيديوهات الترويجية والتقديمية.">Editing for promotional and presentation videos.</p>
                 </div>
                 <div class="card scroll-animate">
                     <div class="led-background"></div>
@@ -838,38 +974,59 @@
     <section id="portfolio">
         <div class="container">
             <h2 class="section-title scroll-animate" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
-            <div class="grid" id="portfolio-grid">
+            <div class="portfolio-container" id="portfolio-grid">
+                <!-- Video 1 -->
                 <div class="portfolio-item scroll-animate" data-category="corporate">
                     <div class="video-container">
                         <video muted loop playsinline preload="none" data-src="Work1.mp4" poster="Poster1.jpg">
                             <source type="video/mp4">
                         </video>
-                        <div class="overlay"><i class="fas fa-play"></i></div>
+                        <!-- Updated Play Button Centered -->
+                        <div class="overlay">
+                            <div class="play-btn-wrapper">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="portfolio-info">
-                        <span data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</span>
+                    <div class="video-info">
+                        <div class="video-title" data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</div>
+                        <div class="video-category" data-en="Promotional Content" data-ar="محتوى ترويجي">Promotional Content</div>
                     </div>
                 </div>
+                
+                <!-- Video 2 -->
                 <div class="portfolio-item scroll-animate" data-category="creative">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Creative">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/320x568/0a0a0a/ffffff?text=Creative+Style">
                             <source type="video/mp4">
                         </video>
-                        <div class="overlay"><i class="fas fa-play"></i></div>
+                        <div class="overlay">
+                            <div class="play-btn-wrapper">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="portfolio-info">
-                        <span data-en="Creative Content" data-ar="محتوى إبداعي">Creative Content</span>
+                    <div class="video-info">
+                        <div class="video-title" data-en="Creative Content" data-ar="محتوى إبداعي">Creative Content</div>
+                        <div class="video-category" data-en="Social Media Reels" data-ar="ريلز وسائل التواصل">Social Media Reels</div>
                     </div>
                 </div>
+                
+                <!-- Video 3 -->
                 <div class="portfolio-item scroll-animate" data-category="documentary">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/600x338/0a0a0a/ffffff?text=Documentary">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/320x568/0a0a0a/ffffff?text=Documentary">
                             <source type="video/mp4">
                         </video>
-                        <div class="overlay"><i class="fas fa-play"></i></div>
+                        <div class="overlay">
+                            <div class="play-btn-wrapper">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="portfolio-info">
-                        <span data-en="Documentary" data-ar="وثائقي">Documentary</span>
+                    <div class="video-info">
+                        <div class="video-title" data-en="Documentary" data-ar="وثائقي">Documentary</div>
+                        <div class="video-category" data-en="Cinematic Storytelling" data-ar="سرد سينمائي">Cinematic Storytelling</div>
                     </div>
                 </div>
             </div>
@@ -1027,9 +1184,9 @@
                 if (el.id === 'copyright-text') {
                     // Use innerHTML for copyright to render span tag
                     if (currentLang === 'ar') {
-                        el.innerHTML = '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو محترف';
+                        el.innerHTML = '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو';
                     } else {
-                        el.innerHTML = '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Professional Video Editor';
+                        el.innerHTML = '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Video Editor';
                     }
                 } else {
                     // Use textContent for other elements
@@ -1037,10 +1194,10 @@
                 }
             });
             
-            // Explicitly update portfolio info spans
-            document.querySelectorAll('.portfolio-info span').forEach(span => {
-                const text = span.getAttribute('data-' + currentLang);
-                if (text) span.textContent = text;
+            // Update video titles and categories
+            document.querySelectorAll('.video-title, .video-category').forEach(el => {
+                const text = el.getAttribute('data-' + currentLang);
+                if (text) el.textContent = text;
             });
             
             // Update button text
@@ -1076,8 +1233,8 @@
         function initializeCopyright() {
             const copyrightElement = document.getElementById('copyright-text');
             if (copyrightElement) {
-                copyrightElement.setAttribute('data-en', '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Professional Video Editor');
-                copyrightElement.setAttribute('data-ar', '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو محترف');
+                copyrightElement.setAttribute('data-en', '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Video Editor');
+                copyrightElement.setAttribute('data-ar', '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو');
             }
         }
         
@@ -1198,9 +1355,9 @@
         const modalVideo = document.getElementById('modal-video');
         const closeModalBtn = document.querySelector('.close-modal');
         
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const videoElement = item.querySelector('video');
+        document.querySelectorAll('.video-container').forEach(container => {
+            container.addEventListener('click', () => {
+                const videoElement = container.querySelector('video');
                 const src = videoElement.dataset.src;
                 
                 // Show loading state or just set src
