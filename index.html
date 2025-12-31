@@ -262,12 +262,19 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
+        
+        /* === إصلاح مشكلة محاذاة النص في البطاقات === */
         .card {
             background: var(--glass);
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 2.5rem;
-            text-align: center;
+            /* استخدام Flexbox لتوسيط المحتوى تماماً */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* لضمان توزيع المحتوى بشكل جيد */
+            text-align: center; /* محاذاة النص */
             backdrop-filter: blur(15px);
             transition: var(--transition);
             position: relative;
@@ -276,6 +283,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+        
         .card.visible { opacity: 1; transform: translateY(0); }
         .card:hover {
             transform: translateY(-15px);
