@@ -332,14 +332,63 @@
         }
         
         .card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text); }
-        .card p { color: var(--text-secondary); }
+        .card p { 
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
         
-        /* LED effect on "dynamic" word */
+        /* === FIX: LED effect on "dynamic" word - IMPROVED VERSION === */
         .led-word {
             color: var(--primary);
             font-weight: 700;
             position: relative;
-            text-shadow: 0 0 5px var(--led-glow);
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 0 2px;
+            border-radius: 4px;
+            text-shadow: 0 0 5px var(--led-glow),
+                         0 0 10px var(--led-glow);
+            background: rgba(110, 64, 255, 0.1);
+            animation: ledWordPulse 1.5s infinite alternate;
+            transition: var(--transition);
+            transform: translateZ(0);
+        }
+        
+        .card:hover .led-word {
+            animation: ledWordPulseHover 0.8s infinite alternate;
+            text-shadow: 0 0 8px var(--led-glow),
+                         0 0 16px var(--led-glow),
+                         0 0 24px var(--led-glow);
+            background: rgba(110, 64, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        @keyframes ledWordPulse {
+            0% { 
+                text-shadow: 0 0 5px var(--led-glow),
+                             0 0 10px var(--led-glow);
+                box-shadow: 0 0 5px rgba(110, 64, 255, 0.3);
+            }
+            100% { 
+                text-shadow: 0 0 8px var(--led-glow),
+                             0 0 15px var(--led-glow);
+                box-shadow: 0 0 8px rgba(110, 64, 255, 0.5);
+            }
+        }
+        
+        @keyframes ledWordPulseHover {
+            0% { 
+                text-shadow: 0 0 8px var(--led-glow),
+                             0 0 16px var(--led-glow),
+                             0 0 24px var(--led-glow);
+                box-shadow: 0 0 8px rgba(110, 64, 255, 0.5);
+            }
+            100% { 
+                text-shadow: 0 0 12px var(--led-glow),
+                             0 0 20px var(--led-glow),
+                             0 0 30px var(--led-glow);
+                box-shadow: 0 0 12px rgba(110, 64, 255, 0.7);
+            }
         }
 
         @keyframes ledPulse {
@@ -983,10 +1032,10 @@
         <div class="container">
             <h2 class="section-title scroll-animate" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
             <div class="portfolio-container" id="portfolio-grid">
-                <!-- Video 1 -->
+                <!-- Video 1 - Corporate -->
                 <div class="portfolio-item scroll-animate" data-category="corporate">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://res.cloudinary.com/dbddmqudy/video/upload/v1767256775/Work1_vgz123.mp4" poster="Poster1.jpg">
+                        <video muted loop playsinline preload="none" data-src="https://res.cloudinary.com/dbddmqudy/video/upload/v1767256775/Work1_vgz123.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Corporate+Video">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1001,10 +1050,10 @@
                     </div>
                 </div>
                 
-                <!-- Video 2 -->
+                <!-- Video 2 - Creative -->
                 <div class="portfolio-item scroll-animate" data-category="creative">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/320x568/0a0a0a/ffffff?text=Creative+Style">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Creative+Content">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1019,10 +1068,10 @@
                     </div>
                 </div>
                 
-                <!-- Video 3 -->
+                <!-- Video 3 - Documentary -->
                 <div class="portfolio-item scroll-animate" data-category="documentary">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/320x568/0a0a0a/ffffff?text=Documentary">
+                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Documentary">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1367,15 +1416,11 @@
                 const videoElement = container.querySelector('video');
                 const src = videoElement.dataset.src;
                 
-                // Show loading state or just set src
-                // If it's a Google Drive link, try to fix it or use proxy
-                let finalSrc = src;
-                if (src.includes('drive.google.com')) {
-                    const fileId = src.match(/id=([^&]+)/) || src.match(/\/d\/([^/]+)/);
-                    if (fileId) finalSrc = `https://drive.google.com/uc?export=download&id=${fileId[1]}`;
-                }
-
-                modalVideo.src = finalSrc;
+                // Show loading state
+                modalVideo.innerHTML = '<div style="color: white; padding: 20px; text-align: center;"><i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 1rem;"></i><br>Loading video...</div>';
+                
+                // Set video source
+                modalVideo.src = src;
                 modalVideo.load();
                 
                 modal.classList.add('active');
@@ -1383,8 +1428,13 @@
                 // Attempt to play and handle potential errors
                 const playPromise = modalVideo.play();
                 if (playPromise !== undefined) {
-                    playPromise.catch(error => {
+                    playPromise.then(() => {
+                        // Video played successfully
+                        console.log("Video playing successfully");
+                    }).catch(error => {
                         console.error("Video play failed:", error);
+                        // Show error message
+                        modalVideo.innerHTML = '<div style="color: white; padding: 20px; text-align: center;"><i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; color: #ff6b6b;"></i><br>Video playback error<br><small>Try clicking the play button in the video controls</small><br><button onclick="location.reload()" style="margin-top: 10px; padding: 10px 20px; background: var(--primary); border: none; color: white; border-radius: 5px; cursor: pointer;">Refresh Page</button></div>';
                     });
                 }
             });
@@ -1420,8 +1470,14 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (entry.target.tagName === 'VIDEO') {
-                        entry.target.src = entry.target.dataset.src;
-                        entry.target.load();
+                        // Load video when it's visible
+                        const video = entry.target;
+                        if (!video.src) {
+                            video.src = video.dataset.src;
+                            video.load().catch(err => {
+                                console.log("Video preload error:", err);
+                            });
+                        }
                     }
                     entry.target.classList.add('visible');
                 }
@@ -1464,6 +1520,14 @@
                 nameElement.style.boxShadow = 'none';
             });
         }
+        
+        // Test LED word effect
+        console.log("Testing LED word effect...");
+        const ledWords = document.querySelectorAll('.led-word');
+        ledWords.forEach(word => {
+            console.log("LED word found:", word.textContent);
+            word.style.display = 'inline-block'; // تأكد أنه inline-block
+        });
     </script>
 </body>
 </html>
