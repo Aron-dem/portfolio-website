@@ -1097,7 +1097,10 @@
             <div class="grid">
                 <div class="card pricing-card scroll-animate">
                     <h3 data-en="Basic" data-ar="أساسية">Basic</h3>
-                    <div class="price">$299</div>
+                    <div class="price">
+                        <span class="price-number">249</span>
+                        <span class="price-currency" data-en="EGP" data-ar="جنيه">EGP</span>
+                    </div>
                     <ul>
                         <li data-en="Up to 5 minutes" data-ar="حتى 5 دقائق">Up to 5 minutes</li>
                         <li data-en="Basic color correction" data-ar="تصحيح لون أساسي">Basic color correction</li>
@@ -1108,7 +1111,10 @@
                 </div>
                 <div class="card pricing-card featured scroll-animate">
                     <h3 data-en="Professional" data-ar="احترافية">Professional</h3>
-                    <div class="price">$599</div>
+                    <div class="price">
+                        <span class="price-number">349</span>
+                        <span class="price-currency" data-en="EGP" data-ar="جنيه">EGP</span>
+                    </div>
                     <ul>
                         <li data-en="Up to 15 minutes" data-ar="حتى 15 دقيقة">Up to 15 minutes</li>
                         <li data-en="Advanced color grading" data-ar="تدريج لون متقدم">Advanced color grading</li>
@@ -1119,7 +1125,10 @@
                 </div>
                 <div class="card pricing-card scroll-animate">
                     <h3 data-en="Premium" data-ar="بريميوم">Premium</h3>
-                    <div class="price">$999</div>
+                    <div class="price">
+                        <span class="price-number">449</span>
+                        <span class="price-currency" data-en="EGP" data-ar="جنيه">EGP</span>
+                    </div>
                     <ul>
                         <li data-en="Unlimited length" data-ar="طول غير محدود">Unlimited length</li>
                         <li data-en="Cinematic effects" data-ar="تأثيرات سينمائية">Cinematic effects</li>
@@ -1233,6 +1242,11 @@
                 } else {
                     el.textContent = el.getAttribute('data-' + currentLang);
                 }
+            });
+            
+            // Update price currency
+            document.querySelectorAll('.price-currency').forEach(el => {
+                el.textContent = el.getAttribute('data-' + currentLang);
             });
             
             document.querySelectorAll('.video-title, .video-category').forEach(el => {
