@@ -263,18 +263,17 @@
             gap: 2rem;
         }
         
-        /* === إصلاح مشكلة محاذاة النص في البطاقات === */
+        /* === بطاقات الخدمات === */
         .card {
             background: var(--glass);
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 2.5rem;
-            /* استخدام Flexbox لتوسيط المحتوى تماماً */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* لضمان توزيع المحتوى بشكل جيد */
-            text-align: center; /* محاذاة النص */
+            justify-content: flex-start;
+            text-align: center;
             backdrop-filter: blur(15px);
             transition: var(--transition);
             position: relative;
@@ -337,7 +336,7 @@
             line-height: 1.6;
         }
         
-        /* === FIX: LED effect on "dynamic" word - IMPROVED VERSION === */
+        /* === LED effect on "dynamic" word === */
         .led-word {
             color: var(--primary);
             font-weight: 700;
@@ -346,48 +345,51 @@
             padding: 2px 6px;
             margin: 0 2px;
             border-radius: 4px;
-            text-shadow: 0 0 5px var(--led-glow),
-                         0 0 10px var(--led-glow);
-            background: rgba(110, 64, 255, 0.1);
-            animation: ledWordPulse 1.5s infinite alternate;
+            background: rgba(110, 64, 255, 0.15);
+            border: 1px solid rgba(110, 64, 255, 0.3);
+            text-shadow: 0 0 8px var(--led-glow),
+                         0 0 12px var(--led-glow);
+            box-shadow: 0 0 10px rgba(110, 64, 255, 0.5),
+                       inset 0 0 10px rgba(110, 64, 255, 0.2);
+            animation: ledWordPulse 2s infinite alternate;
             transition: var(--transition);
-            transform: translateZ(0);
         }
         
         .card:hover .led-word {
-            animation: ledWordPulseHover 0.8s infinite alternate;
-            text-shadow: 0 0 8px var(--led-glow),
-                         0 0 16px var(--led-glow),
-                         0 0 24px var(--led-glow);
-            background: rgba(110, 64, 255, 0.2);
+            animation: ledWordPulseHover 1s infinite alternate;
+            background: rgba(110, 64, 255, 0.25);
+            box-shadow: 0 0 15px rgba(110, 64, 255, 0.7),
+                       inset 0 0 15px rgba(110, 64, 255, 0.3);
             transform: scale(1.05);
         }
         
         @keyframes ledWordPulse {
             0% { 
                 text-shadow: 0 0 5px var(--led-glow),
-                             0 0 10px var(--led-glow);
-                box-shadow: 0 0 5px rgba(110, 64, 255, 0.3);
+                             0 0 8px var(--led-glow);
+                box-shadow: 0 0 8px rgba(110, 64, 255, 0.4),
+                           inset 0 0 8px rgba(110, 64, 255, 0.1);
             }
             100% { 
-                text-shadow: 0 0 8px var(--led-glow),
+                text-shadow: 0 0 10px var(--led-glow),
                              0 0 15px var(--led-glow);
-                box-shadow: 0 0 8px rgba(110, 64, 255, 0.5);
+                box-shadow: 0 0 12px rgba(110, 64, 255, 0.6),
+                           inset 0 0 12px rgba(110, 64, 255, 0.2);
             }
         }
         
         @keyframes ledWordPulseHover {
             0% { 
-                text-shadow: 0 0 8px var(--led-glow),
-                             0 0 16px var(--led-glow),
-                             0 0 24px var(--led-glow);
-                box-shadow: 0 0 8px rgba(110, 64, 255, 0.5);
+                text-shadow: 0 0 10px var(--led-glow),
+                             0 0 15px var(--led-glow);
+                box-shadow: 0 0 12px rgba(110, 64, 255, 0.6),
+                           inset 0 0 12px rgba(110, 64, 255, 0.2);
             }
             100% { 
-                text-shadow: 0 0 12px var(--led-glow),
-                             0 0 20px var(--led-glow),
-                             0 0 30px var(--led-glow);
-                box-shadow: 0 0 12px rgba(110, 64, 255, 0.7);
+                text-shadow: 0 0 15px var(--led-glow),
+                             0 0 20px var(--led-glow);
+                box-shadow: 0 0 18px rgba(110, 64, 255, 0.8),
+                           inset 0 0 18px rgba(110, 64, 255, 0.3);
             }
         }
 
@@ -402,7 +404,7 @@
             100% { text-shadow: 0 0 10px var(--led-glow); }
         }
 
-        /* === PORTFOLIO STYLING - CENTER PLAY BUTTON WITH EFFECT === */
+        /* === PORTFOLIO STYLING === */
         .portfolio-container {
             display: flex;
             flex-wrap: wrap;
@@ -428,7 +430,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            height: 568px; /* 320 * 1.777 = 568 (9:16) */
+            height: 568px;
             border-radius: 15px;
             overflow: hidden;
             background: #000;
@@ -449,17 +451,16 @@
             display: block;
         }
         
-        /* Overlay Update: Centered & Darker */
         .video-container .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* خلفية داكنة عند التحويم */
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
-            align-items: center; /* توسيط عمودي */
-            justify-content: center; /* توسيط أفقي */
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: var(--transition);
             border-radius: 15px;
@@ -470,7 +471,6 @@
             opacity: 1;
         }
         
-        /* Play Button Wrapper Design */
         .play-btn-wrapper {
             width: 70px;
             height: 70px;
@@ -488,11 +488,10 @@
         .play-btn-wrapper i {
             color: white;
             font-size: 24px;
-            margin-left: 4px; /* محاذاة بصرية */
+            margin-left: 4px;
             z-index: 2;
         }
 
-        /* Wave Effect (Ripple) behind button */
         .play-btn-wrapper::before {
             content: '';
             position: absolute;
@@ -507,10 +506,9 @@
         }
 
         .video-container:hover .play-btn-wrapper {
-            transform: scale(1.1); /* تكبير عند التحويم */
+            transform: scale(1.1);
         }
         
-        /* Animations */
         @keyframes playPulse {
             0% {
                 transform: scale(1);
@@ -537,7 +535,6 @@
             }
         }
 
-        /* Video Info */
         .video-info {
             text-align: center;
             margin-top: 20px;
@@ -609,7 +606,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* === Developer Section with LED Effect === */
+        /* === Developer Section === */
         .developer-section {
             text-align: center;
             padding: 4rem 0;
@@ -641,7 +638,6 @@
             margin-bottom: 1rem;
         }
         
-        /* Developer name link styling */
         .developer-name-link {
             display: inline-flex;
             align-items: center;
@@ -673,7 +669,6 @@
             transition: var(--transition);
         }
         
-        /* Facebook icon styling - ALWAYS VISIBLE */
         .facebook-icon {
             font-size: 2.5rem;
             color: var(--facebook-blue);
@@ -728,7 +723,6 @@
             opacity: 0.8;
         }
         
-        /* Facebook tooltip */
         .facebook-tooltip {
             position: absolute;
             bottom: 100%;
@@ -764,7 +758,6 @@
             visibility: visible;
         }
         
-        /* Glowing effect around the icon */
         .icon-glow {
             position: absolute;
             top: 50%;
@@ -867,7 +860,6 @@
             margin-top: 1rem;
         }
         
-        /* حقوق النشر المحدثة */
         .copyright {
             text-align: center;
             padding: 2rem 0;
@@ -932,13 +924,12 @@
                 height: 50px;
             }
             
-            /* Responsive portfolio for mobile */
             .portfolio-item {
                 width: 280px;
             }
             
             .video-container {
-                height: 498px; /* 280 * 1.777 = 498 */
+                height: 498px;
             }
             
             .portfolio-container {
@@ -949,7 +940,6 @@
                 font-size: 1.2rem;
             }
             
-            /* Play button mobile adjustment */
             .play-btn-wrapper {
                 width: 60px;
                 height: 60px;
@@ -1035,7 +1025,10 @@
                 <!-- Video 1 - Corporate -->
                 <div class="portfolio-item scroll-animate" data-category="corporate">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://res.cloudinary.com/dbddmqudy/video/upload/v1767256775/Work1_vgz123.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Corporate+Video">
+                        <!-- بوستر قديم: Poster1.jpg -->
+                        <video muted loop playsinline preload="none" 
+                               data-src="https://res.cloudinary.com/dbddmqudy/video/upload/v1767256775/Work1_vgz123.mp4" 
+                               poster="Poster1.jpg">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1053,7 +1046,9 @@
                 <!-- Video 2 - Creative -->
                 <div class="portfolio-item scroll-animate" data-category="creative">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Creative+Content">
+                        <video muted loop playsinline preload="none" 
+                               data-src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-busy-city-at-night-41537-large.mp4" 
+                               poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Creative+Content">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1071,7 +1066,9 @@
                 <!-- Video 3 - Documentary -->
                 <div class="portfolio-item scroll-animate" data-category="documentary">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Documentary">
+                        <video muted loop playsinline preload="none" 
+                               data-src="https://assets.mixkit.co/videos/preview/mixkit-view-of-a-natural-landscape-50851-large.mp4" 
+                               poster="https://via.placeholder.com/320x568/6e40ff/ffffff?text=Documentary">
                             <source type="video/mp4">
                         </video>
                         <div class="overlay">
@@ -1152,24 +1149,21 @@
         </div>
     </section>
 
-    <!-- === Developer Section with LED Effect === -->
+    <!-- === Developer Section === -->
     <div class="developer-section">
         <div class="developer-glow"></div>
         <div class="container">
             <p class="developer-text" data-en="This website is programmed by" data-ar="تم برمجة هذا الموقع بواسطة">This website is programmed by</p>
             
-            <!-- Developer name with Facebook link and VISIBLE Facebook icon -->
             <a href="https://www.facebook.com/profile.php?id=100090734732146" 
                target="_blank" 
                class="developer-name-link"
                data-en-title="Visit my Facebook profile"
                data-ar-title="زيارة حسابي على فيسبوك">
                 
-                <!-- Facebook icon - ALWAYS VISIBLE -->
                 <div class="icon-glow"></div>
                 <i class="fab fa-facebook facebook-icon"></i>
                 
-                <!-- Developer name -->
                 <div class="developer-name-container">
                     <div class="developer-name" data-en="Seif Abdelrahman" data-ar="سيف عبدالرحمن">Seif Abdelrahman</div>
                     <div class="facebook-tooltip" data-en="Visit my Facebook profile" data-ar="زيارة حسابي على فيسبوك">Visit my Facebook profile</div>
@@ -1180,33 +1174,28 @@
         </div>
     </div>
 
-    <!-- حقوق النشر - الإصلاح -->
     <div class="copyright">
         <p id="copyright-text"></p>
     </div>
 
     <script>
-        // === ANIMATED BACKGROUND - AUTOMATIC SPEED UP ===
+        // === ANIMATED BACKGROUND ===
         const animatedBg = document.querySelector('.animated-bg');
         
-        // Set initial fast speed
-        let animationSpeed = 2.0; // Twice as fast
+        let animationSpeed = 2.0;
         
-        // Apply fast speed immediately
         function applyFastSpeed() {
             animatedBg.style.animationDuration = `${8 / animationSpeed}s`;
         }
         
-        // Apply fast speed on load
         applyFastSpeed();
         
-        // Increase speed every 10 seconds
         setInterval(() => {
-            if (animationSpeed < 3.5) { // Max speed limit
+            if (animationSpeed < 3.5) {
                 animationSpeed += 0.1;
                 applyFastSpeed();
             }
-        }, 10000); // Increase speed every 10 seconds
+        }, 10000);
 
         // Particles.js
         particlesJS("particles-js", {
@@ -1228,53 +1217,43 @@
 
         // Language & Theme Toggle
         const langToggle = document.getElementById('lang-toggle');
-        let currentLang = 'en'; // English by default
+        let currentLang = 'en';
         
-        // Function to update all text based on current language
         function updateLanguage() {
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             
-            // Update all elements with data-en & data-ar using innerHTML for HTML tags
             document.querySelectorAll('[data-en][data-ar]').forEach(el => {
                 if (el.id === 'copyright-text') {
-                    // Use innerHTML for copyright to render span tag
                     if (currentLang === 'ar') {
                         el.innerHTML = '© جميع الحقوق محفوظة <span class="year">2025</span> | مصطفى محمود - محرر فيديو';
                     } else {
                         el.innerHTML = '© All rights reserved <span class="year">2025</span> | Mostafa Mahmoud - Video Editor';
                     }
                 } else {
-                    // Use textContent for other elements
                     el.textContent = el.getAttribute('data-' + currentLang);
                 }
             });
             
-            // Update video titles and categories
             document.querySelectorAll('.video-title, .video-category').forEach(el => {
                 const text = el.getAttribute('data-' + currentLang);
                 if (text) el.textContent = text;
             });
             
-            // Update button text
             langToggle.textContent = currentLang === 'ar' ? 'EN' : 'ع';
             
-            // Update tooltip text
             const facebookTooltip = document.querySelector('.facebook-tooltip');
             if (facebookTooltip) {
                 facebookTooltip.textContent = facebookTooltip.getAttribute('data-' + currentLang);
             }
             
-            // Update Facebook link title
             const facebookLink = document.querySelector('.developer-name-link');
             if (facebookLink) {
                 facebookLink.title = facebookLink.getAttribute('data-' + currentLang + '-title');
             }
             
-            // Save language preference
             localStorage.setItem('language', currentLang);
             
-            // Update WhatsApp link based on language
             const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
             whatsappLinks.forEach(link => {
                 if (currentLang === 'ar') {
@@ -1285,7 +1264,6 @@
             });
         }
         
-        // Initialize copyright element
         function initializeCopyright() {
             const copyrightElement = document.getElementById('copyright-text');
             if (copyrightElement) {
@@ -1294,24 +1272,20 @@
             }
         }
         
-        // Load saved language
         const savedLanguage = localStorage.getItem('language');
         if (savedLanguage) {
             currentLang = savedLanguage;
         } else {
-            currentLang = 'en'; // Default to English
+            currentLang = 'en';
         }
         
-        // Initialize copyright and apply language on page load
         initializeCopyright();
         updateLanguage();
         
-        // Toggle language on button click
         langToggle.addEventListener('click', () => {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             updateLanguage();
             
-            // Close mobile menu if open
             hamburger.setAttribute('aria-expanded', 'false');
             hamburger.classList.remove('active');
             navLinks.classList.remove('open');
@@ -1324,7 +1298,6 @@
             localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
         });
 
-        // Load saved theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
             document.body.classList.add('light');
@@ -1335,7 +1308,6 @@
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('shrink', window.scrollY > 50);
             
-            // Active link logic
             const sections = document.querySelectorAll('section');
             let current = '';
             
@@ -1365,7 +1337,6 @@
             navLinks.classList.toggle('open');
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
                 hamburger.setAttribute('aria-expanded', 'false');
@@ -1379,15 +1350,12 @@
         
         serviceCards.forEach(card => {
             card.addEventListener('click', function() {
-                // Remove active class from all cards
                 serviceCards.forEach(c => {
                     c.classList.remove('active');
                 });
                 
-                // Add active class to clicked card
                 this.classList.add('active');
                 
-                // If it's the Creative Content card, add extra LED effect
                 const icon = this.querySelector('i');
                 if (icon && icon.classList.contains('fa-fire')) {
                     const ledBackground = this.querySelector('.led-background');
@@ -1396,7 +1364,6 @@
                 }
             });
             
-            // Remove active class when clicking elsewhere
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.card')) {
                     serviceCards.forEach(card => {
@@ -1416,38 +1383,31 @@
                 const videoElement = container.querySelector('video');
                 const src = videoElement.dataset.src;
                 
-                // Show loading state
                 modalVideo.innerHTML = '<div style="color: white; padding: 20px; text-align: center;"><i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 1rem;"></i><br>Loading video...</div>';
                 
-                // Set video source
                 modalVideo.src = src;
                 modalVideo.load();
                 
                 modal.classList.add('active');
                 
-                // Attempt to play and handle potential errors
                 const playPromise = modalVideo.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        // Video played successfully
                         console.log("Video playing successfully");
                     }).catch(error => {
                         console.error("Video play failed:", error);
-                        // Show error message
                         modalVideo.innerHTML = '<div style="color: white; padding: 20px; text-align: center;"><i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; color: #ff6b6b;"></i><br>Video playback error<br><small>Try clicking the play button in the video controls</small><br><button onclick="location.reload()" style="margin-top: 10px; padding: 10px 20px; background: var(--primary); border: none; color: white; border-radius: 5px; cursor: pointer;">Refresh Page</button></div>';
                     });
                 }
             });
         });
         
-        // Close modal with button
         closeModalBtn.addEventListener('click', () => {
             modal.classList.remove('active');
             modalVideo.pause();
             modalVideo.src = '';
         });
         
-        // Close modal when clicking outside
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
@@ -1456,7 +1416,6 @@
             }
         });
         
-        // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 modal.classList.remove('active');
@@ -1465,12 +1424,11 @@
             }
         });
 
-        // Lazy load videos & scroll animation
+        // === SCROLL ANIMATION ===
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (entry.target.tagName === 'VIDEO') {
-                        // Load video when it's visible
                         const video = entry.target;
                         if (!video.src) {
                             video.src = video.dataset.src;
@@ -1484,7 +1442,8 @@
             });
         }, { threshold: 0.1 });
         
-        document.querySelectorAll('video, .scroll-animate').forEach(el => observer.observe(el));
+        document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+        document.querySelectorAll('video').forEach(el => observer.observe(el));
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1497,7 +1456,6 @@
                         block: 'start'
                     });
                     
-                    // Close mobile menu after click
                     hamburger.setAttribute('aria-expanded', 'false');
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('open');
@@ -1509,25 +1467,15 @@
         const facebookLink = document.querySelector('.developer-name-link');
         if (facebookLink) {
             facebookLink.addEventListener('mouseenter', function() {
-                // Add extra glow effect
                 const nameElement = this.querySelector('.developer-name');
                 nameElement.style.boxShadow = '0 0 30px rgba(24, 119, 242, 0.5)';
             });
             
             facebookLink.addEventListener('mouseleave', function() {
-                // Remove extra glow effect
                 const nameElement = this.querySelector('.developer-name');
                 nameElement.style.boxShadow = 'none';
             });
         }
-        
-        // Test LED word effect
-        console.log("Testing LED word effect...");
-        const ledWords = document.querySelectorAll('.led-word');
-        ledWords.forEach(word => {
-            console.log("LED word found:", word.textContent);
-            word.style.display = 'inline-block'; // تأكد أنه inline-block
-        });
     </script>
 </body>
 </html>
