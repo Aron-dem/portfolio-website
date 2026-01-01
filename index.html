@@ -983,19 +983,17 @@
         <div class="container">
             <h2 class="section-title scroll-animate" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
             <div class="portfolio-container" id="portfolio-grid">
-                <!-- Video 1 -->
-                <div class="portfolio-item scroll-animate" data-category="corporate">
+                <!-- Vide                <div class="portfolio-item scroll-animate" data-category="corporate">
                     <div class="video-container">
-                        <video muted loop playsinline preload="none" data-src="https://drive.google.com/uc?export=download&id=1hpak5r6CPUs09rUJmMlKjNXl12gfuRbs" poster="Poster1.jpg">
+                        <video muted loop playsinline preload="none" data-src="Work1.mp4" poster="Poster1.jpg">
                             <source type="video/mp4">
                         </video>
-                        <!-- Updated Play Button Centered -->
-                        <div class="overlay">
-                            <div class="play-btn-wrapper">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        </div>
+                        <div class="overlay"><i class="fas fa-play"></i></div>
                     </div>
+                    <div class="portfolio-info">
+                        <span data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</span>
+                    </div>
+                </div>                 </div>
                     <div class="video-info">
                         <div class="video-title" data-en="Corporate Video" data-ar="فيديو شركة">Corporate Video</div>
                         <div class="video-category" data-en="Promotional Content" data-ar="محتوى ترويجي">Promotional Content</div>
@@ -1369,8 +1367,15 @@
                 const src = videoElement.dataset.src;
                 
                 // Show loading state or just set src
-                modalVideo.innerHTML = `<source src="${src}" type="video/mp4"> Your browser does not support the video tag.`;
-                modalVideo.load(); // Force reload the video source
+                // If it's a Google Drive link, try to fix it or use proxy
+                let finalSrc = src;
+                if (src.includes('drive.google.com')) {
+                    const fileId = src.match(/id=([^&]+)/) || src.match(/\/d\/([^/]+)/);
+                    if (fileId) finalSrc = `https://drive.google.com/uc?export=download&id=${fileId[1]}`;
+                }
+
+                modalVideo.src = finalSrc;
+                modalVideo.load();
                 
                 modal.classList.add('active');
                 
